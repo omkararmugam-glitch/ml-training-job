@@ -12,8 +12,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat '''
-                py -m pip install --upgrade pip
-                py -m pip install -r requirements.txt
+                python -m pip install --upgrade pip
+                python -m pip install -r requirements.txt
                 '''
             }
         }
@@ -21,7 +21,7 @@ pipeline {
         stage('Train Model') {
             steps {
                 bat '''
-                py src\\train_sklearn.py
+                python src\\train_sklearn.py
                 '''
             }
         }
