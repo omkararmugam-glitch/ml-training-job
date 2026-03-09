@@ -5,7 +5,17 @@ pipeline {
 
         stage('Checkout') {
             steps {
+                echo 'Cloning repository...'
                 checkout scm
+            }
+        }
+
+        stage('Check Python') {
+            steps {
+                bat '''
+                python --version
+                python -m pip --version
+                '''
             }
         }
 
