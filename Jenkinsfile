@@ -12,18 +12,17 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh '''
-                python3 --version || python --version
-                python3 -m pip install --upgrade pip || true
-                pip3 install -r requirements.txt || pip install -r requirements.txt
+                bat '''
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
                 '''
             }
         }
 
         stage('Train Model') {
             steps {
-                sh '''
-                python3 src/train_sklearn.py || python src/train_sklearn.py
+                bat '''
+                python src\\train_sklearn.py
                 '''
             }
         }
