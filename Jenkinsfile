@@ -5,7 +5,6 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'Cloning repository'
                 checkout scm
             }
         }
@@ -13,8 +12,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat '''
-                python -m pip install --upgrade pip
-                pip install -r requirements.txt
+                py -m pip install --upgrade pip
+                py -m pip install -r requirements.txt
                 '''
             }
         }
@@ -22,7 +21,7 @@ pipeline {
         stage('Train Model') {
             steps {
                 bat '''
-                python src\\train_sklearn.py
+                py src\\train_sklearn.py
                 '''
             }
         }
