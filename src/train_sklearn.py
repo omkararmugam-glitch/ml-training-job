@@ -1,20 +1,37 @@
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 import joblib
 import os
 
-df = pd.read_csv("data/dataset.csv")
+# Load dataset
+data = pd.read_csv("data/dataset.csv")
 
-X = df.drop("target", axis=1)
-y = df["target"]
+# Assume last column is the target
+X = data.iloc[:, :-1]
+y = data.iloc[:, -1]
 
-X_train, X_test, y_train, y_test = train_test_split(X, y)
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
+# Train model
 model = RandomForestClassifier()
 model.fit(X_train, y_train)
 
-os.makedirs("models", exist_ok=True)
-joblib.dump(model, "models/model.pkl")
+# Predict
+predictions = model.predict(X_test)
 
-print("Model trained successfully")
+# Evaluate
+accuracy = accuracy_score(y_test, predictions)
+print("Model Accuracy:", accuracy)
+
+# Create models folder if not exists
+os.makedirs("models", exist_ok=True)
+
+# Save model
+joblib.dump(model, "models/random_forest_model.pkl")
+
+print("Model saved successfully.")
