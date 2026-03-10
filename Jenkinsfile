@@ -37,8 +37,9 @@ pipeline {
 
         stage('Archive Model') {
             steps {
-                archiveArtifacts artifacts: 'models/*', fingerprint: true
+                archiveArtifacts artifacts: 'models/*.pkl', fingerprint: true
             }
         }
+
     }
 }
