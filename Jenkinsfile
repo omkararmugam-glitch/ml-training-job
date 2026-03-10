@@ -9,15 +9,6 @@ pipeline {
             }
         }
 
-        stage('Check Python') {
-            steps {
-                bat '''
-                py --version
-                py -m pip --version
-                '''
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 bat '''
