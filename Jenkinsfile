@@ -5,7 +5,6 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'Cloning repository...'
                 checkout scm
             }
         }
@@ -13,7 +12,8 @@ pipeline {
         stage('Check Python') {
             steps {
                 bat '''
-                "C:\\Users\\omkar\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" --version
+                py --version
+                py -m pip --version
                 '''
             }
         }
@@ -21,8 +21,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat '''
-                "C:\\Users\\omkar\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m pip install --upgrade pip
-                "C:\\Users\\omkar\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m pip install -r requirements.txt
+                py -m pip install --upgrade pip
+                py -m pip install -r requirements.txt
                 '''
             }
         }
@@ -30,7 +30,7 @@ pipeline {
         stage('Train Model') {
             steps {
                 bat '''
-                "C:\\Users\\omkar\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" src\\train_sklearn.py
+                py src\\train_sklearn.py
                 '''
             }
         }
@@ -42,4 +42,3 @@ pipeline {
         }
     }
 }
-
