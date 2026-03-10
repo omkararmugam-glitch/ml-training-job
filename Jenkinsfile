@@ -13,8 +13,7 @@ pipeline {
         stage('Check Python') {
             steps {
                 bat '''
-                python --version
-                python -m pip --version
+                "C:\\Users\\omkar\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" --version
                 '''
             }
         }
@@ -22,8 +21,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat '''
-                python -m pip install --upgrade pip
-                python -m pip install -r requirements.txt
+                "C:\\Users\\omkar\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m pip install --upgrade pip
+                "C:\\Users\\omkar\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m pip install -r requirements.txt
                 '''
             }
         }
@@ -31,7 +30,7 @@ pipeline {
         stage('Train Model') {
             steps {
                 bat '''
-                python src\\train_sklearn.py
+                "C:\\Users\\omkar\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" src\\train_sklearn.py
                 '''
             }
         }
@@ -43,3 +42,4 @@ pipeline {
         }
     }
 }
+
